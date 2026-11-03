@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análisis forense — EvidNet</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-home"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+  <symbol id="i-folder"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-file"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></symbol>
+  <symbol id="i-link"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+  <symbol id="i-shuffle"   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></symbol>
+  <symbol id="i-key"       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></symbol>
+  <symbol id="i-activity"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
+  <symbol id="i-pin"       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></symbol>
+  <symbol id="i-alert"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="i-chart"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+  <symbol id="i-users"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-shield"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-logout"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+  <symbol id="i-plus"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+  <symbol id="i-download"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+  <symbol id="i-lock"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-check"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-x"         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  <symbol id="i-hash"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></symbol>
+  <symbol id="i-edit"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></symbol>
+</svg>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <div class="sb-brand-icon"><svg class="ico" style="width:17px;height:17px;stroke-width:2"><use href="#i-shield"/></svg></div>
+      <div><div class="sb-brand-name">EvidNet</div><div class="sb-brand-sub">Cadena de Custodia</div></div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section">
+        <div class="sb-section-label">General</div>
+        <a href="dashboard.html"><svg class="ico"><use href="#i-home"/></svg> Dashboard</a>
+        <a href="incidentes.html"><svg class="ico"><use href="#i-folder"/></svg> Incidentes</a>
+        <a href="evidencias.html"><svg class="ico"><use href="#i-file"/></svg> Evidencias</a>
+      </div>
+      <div class="sb-section">
+        <div class="sb-section-label">Custodia</div>
+        <a href="cadena-custodia.html"><svg class="ico"><use href="#i-link"/></svg> Cadena de custodia</a>
+        <a href="transferencias.html"><svg class="ico"><use href="#i-shuffle"/></svg> Transferencias <span class="sb-badge">3</span></a>
+        <a href="solicitudes.html"><svg class="ico"><use href="#i-key"/></svg> Solicitudes <span class="sb-badge">2</span></a>
+      </div>
+      <div class="sb-section">
+        <div class="sb-section-label">Análisis</div>
+        <a href="analisis-forense.html" class="active"><svg class="ico"><use href="#i-activity"/></svg> Análisis forense</a>
+        <a href="ubicacion.html"><svg class="ico"><use href="#i-pin"/></svg> Ubicación</a>
+      </div>
+      <div class="sb-section">
+        <div class="sb-section-label">Auditoría</div>
+        <a href="bitacora.html"><svg class="ico"><use href="#i-clipboard"/></svg> Bitácora</a>
+        <a href="alertas.html"><svg class="ico"><use href="#i-alert"/></svg> Alertas</a>
+        <a href="informes.html"><svg class="ico"><use href="#i-chart"/></svg> Informes</a>
+        <a href="usuarios.html"><svg class="ico"><use href="#i-users"/></svg> Usuarios</a>
+      </div>
+    </nav>
+    <div class="sb-footer">
+      <div class="sb-user">
+        <div class="sb-avatar">BT</div>
+        <div><div class="sb-user-name">B. Torres</div><div class="sb-user-role">Analista Forense</div></div>
+      </div>
+      <a href="login.html" class="sb-logout"><svg class="ico"><use href="#i-logout"/></svg></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="header">
+      <div class="header-left">
+        <div class="header-title">Análisis forense</div>
+        <div class="header-sub"><span class="mono" style="font-size:11px;">EVD-0449</span> — Imagen disco Srv-DB-01</div>
+      </div>
+      <div class="header-right">
+        <button class="btn btn-default btn-sm" onclick="document.getElementById('mo-hall').classList.add('open')">
+          <svg class="ico"><use href="#i-plus"/></svg> Agregar hallazgo
+        </button>
+        <button class="btn btn-default btn-sm"><svg class="ico"><use href="#i-download"/></svg> Exportar</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="notice notice-info mb-6">
+        <svg class="ico"><use href="#i-lock"/></svg>
+        <span>Evidencia montada en <strong>modo solo lectura</strong>. Cualquier modificación está bloqueada por el sistema.</span>
+      </div>
+
+      <div class="g-side" style="align-items:start;">
+        <!-- Main: findings -->
+        <div>
+          <!-- Progress -->
+          <div class="card mb-6">
+            <div class="card-head"><span class="card-title">Progreso del análisis</span><span class="badge badge-amber">En curso</span></div>
+            <div class="card-body">
+              <div class="flex items-center justify-between mb-4" style="margin-bottom:6px;">
+                <span class="text-sm text-3">Extracción de artefactos</span>
+                <span class="text-sm fw-700">65%</span>
+              </div>
+              <div class="progress mb-4" style="margin-bottom:12px;">
+                <div class="progress-bar" style="width:65%;"></div>
+              </div>
+              <div class="form-hint">Iniciado: 19 oct · Estimado: 22 oct</div>
+            </div>
+          </div>
+
+          <!-- Findings table -->
+          <div class="card">
+            <div class="card-head"><span class="card-title">Hallazgos</span><span class="badge badge-neutral">4 registrados</span></div>
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>Tipo</th><th>Descripción</th><th>Relevancia</th><th>Fecha</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><span class="badge badge-neutral">Artefacto</span></td>
+                    <td>Shell inverso — puerto 4444</td>
+                    <td><span class="badge badge-red">Alta</span></td>
+                    <td><span class="text-3">19 oct 14:20</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-neutral">Log</span></td>
+                    <td>Accesos fallidos — 847 intentos en 2h</td>
+                    <td><span class="badge badge-red">Alta</span></td>
+                    <td><span class="text-3">19 oct 15:00</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-neutral">Archivo</span></td>
+                    <td>Script de exfiltración en /tmp</td>
+                    <td><span class="badge badge-amber">Media</span></td>
+                    <td><span class="text-3">20 oct 09:30</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-neutral">Proceso</span></td>
+                    <td>Proceso desconocido — PID 3127</td>
+                    <td><span class="badge badge-amber">Media</span></td>
+                    <td><span class="text-3">20 oct 11:00</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side: tools & info -->
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div class="card">
+            <div class="card-head"><span class="card-title">Herramientas utilizadas</span></div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:7px;">
+              <div class="flex items-center gap-2"><svg class="ico ico-sm text-3"><use href="#i-check"/></svg><span class="text-sm">Autopsy 4.21</span></div>
+              <div class="flex items-center gap-2"><svg class="ico ico-sm text-3"><use href="#i-check"/></svg><span class="text-sm">Volatility 3</span></div>
+              <div class="flex items-center gap-2"><svg class="ico ico-sm text-3"><use href="#i-check"/></svg><span class="text-sm">Wireshark 4.0</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><span class="card-title">Hash SHA-256</span></div>
+            <div class="card-body">
+              <div class="hash-box">
+                <span class="hash-val" style="font-size:9.5px;">a3f5c2d8e1b4a7f9c3d2e5b8a1f4c7d0…</span>
+                <button class="hash-copy-btn">Copiar</button>
+              </div>
+              <div class="form-hint mt-4">
+                <span class="sem-row sem-green"><span class="sem-dot"></span>Íntegra</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><span class="card-title">Notas del analista</span></div>
+            <div class="card-body">
+              <textarea class="form-control" rows="3" placeholder="Observaciones técnicas…">Probable vector de entrada: vulnerabilidad CVE-2024-1234 en MySQL 8.0.32.</textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal: agregar hallazgo -->
+<div class="modal-overlay" id="mo-hall" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">Agregar hallazgo</span>
+      <button class="modal-close" onclick="document.getElementById('mo-hall').classList.remove('open')"><svg class="ico"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row cols-2">
+        <div class="form-group">
+          <label class="form-label">Tipo</label>
+          <select class="form-control"><option>Artefacto</option><option>Log</option><option>Archivo</option><option>Proceso</option><option>Red</option></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Relevancia</label>
+          <select class="form-control"><option>Alta</option><option>Media</option><option>Baja</option></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Descripción <span class="req">*</span></label>
+        <input class="form-control" placeholder="Descripción del hallazgo">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Detalles técnicos</label>
+        <textarea class="form-control" rows="2" placeholder="Ruta, hash, PID, IP…"></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-default" onclick="document.getElementById('mo-hall').classList.remove('open')">Cancelar</button>
+      <button class="btn btn-primary"><svg class="ico"><use href="#i-check"/></svg> Guardar hallazgo</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

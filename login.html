@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión — EvidNet</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue-950: #0B1628; --blue-800: #1E3A8A; --blue-700: #1D4ED8;
+      --blue-600: #2563EB; --blue-500: #3B82F6; --blue-100: #DBEAFE;
+      --border: #E2E8F0; --text: #1E293B; --text-2: #475569; --text-3: #94A3B8;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, sans-serif;
+    }
+    body { font-family: var(--font); background: var(--blue-950); min-height: 100vh; display: flex; }
+    .layout { display: flex; width: 100%; min-height: 100vh; }
+
+    /* left panel */
+    .left {
+      flex: 1; display: none; flex-direction: column; justify-content: center;
+      padding: 60px; background: linear-gradient(135deg, var(--blue-950) 0%, #0D2040 100%);
+    }
+    @media (min-width: 960px) { .left { display: flex; } }
+    .left-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 48px; }
+    .logo-box {
+      width: 44px; height: 44px; background: var(--blue-600); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .left-title { color: white; font-size: 34px; font-weight: 800; line-height: 1.2; margin-bottom: 14px; }
+    .left-title span { color: var(--blue-500); }
+    .left-desc { color: #3D6080; font-size: 14.5px; line-height: 1.7; max-width: 400px; margin-bottom: 36px; }
+    .feature-list { display: flex; flex-direction: column; gap: 11px; }
+    .feature { display: flex; align-items: center; gap: 10px; }
+    .feature-dot { width: 6px; height: 6px; background: var(--blue-500); border-radius: 50%; flex-shrink: 0; }
+    .feature span { color: #4B6B8C; font-size: 13.5px; }
+
+    /* right panel */
+    .right {
+      width: 100%; max-width: 420px; background: #F8FAFC;
+      display: flex; flex-direction: column; justify-content: center; padding: 44px 40px;
+    }
+    .form-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+    @media (min-width: 960px) { .form-logo { display: none; } }
+    .form-logo-box {
+      width: 36px; height: 36px; background: var(--blue-600); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .form-logo-name { color: var(--text); font-weight: 700; font-size: 15px; }
+    h2 { font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 5px; }
+    .sub { font-size: 13px; color: var(--text-3); margin-bottom: 26px; }
+    .fg { margin-bottom: 14px; }
+    label { display: block; font-size: 12px; font-weight: 600; color: var(--text-2); margin-bottom: 5px; }
+    input[type=email], input[type=password] {
+      width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px;
+      font-size: 14px; font-family: var(--font); outline: none; color: var(--text);
+      transition: border-color .13s, box-shadow .13s;
+    }
+    input:focus { border-color: var(--blue-500); box-shadow: 0 0 0 3px rgba(59,130,246,.1); }
+    .forgot { float: right; font-size: 12px; color: var(--blue-600); text-decoration: none; margin-top: -20px; display: block; }
+    .btn-login {
+      width: 100%; padding: 10px; background: var(--blue-600); color: white;
+      border: none; border-radius: 8px; font-size: 13.5px; font-weight: 700;
+      cursor: pointer; font-family: var(--font); margin-top: 18px;
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      transition: background .12s;
+    }
+    .btn-login:hover { background: var(--blue-700); }
+    .divider { display: flex; align-items: center; gap: 10px; margin: 18px 0; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .divider span { font-size: 11.5px; color: var(--text-3); white-space: nowrap; }
+    .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+    .role-btn {
+      padding: 8px 6px; border: 1px solid var(--border); border-radius: 8px;
+      background: white; text-align: center; cursor: pointer; font-family: var(--font);
+      font-size: 11px; color: var(--text-2); font-weight: 600;
+      transition: all .12s; text-decoration: none; display: block;
+    }
+    .role-btn:hover { border-color: var(--blue-500); color: var(--blue-600); background: #EFF6FF; }
+    .role-btn.active { border-color: var(--blue-600); color: var(--blue-700); background: #EFF6FF; }
+    .role-btn .role-ico { display: block; margin: 0 auto 4px; color: var(--text-3); }
+    .role-btn.active .role-ico { color: var(--blue-600); }
+    .security { margin-top: 20px; padding: 10px 12px; background: #F1F5F9; border-radius: 8px; display: flex; gap: 8px; }
+    .security p { font-size: 11px; color: var(--text-3); line-height: 1.5; }
+    .footer-note { margin-top: 22px; text-align: center; font-size: 11px; color: var(--text-3); }
+
+    /* icon inline */
+    .ico { width: 15px; height: 15px; display: inline-block; vertical-align: -2px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="i-activity" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+</svg>
+
+<div class="layout">
+  <div class="left">
+    <div class="left-logo">
+      <div class="logo-box">
+        <svg class="ico" style="width:20px;height:20px;stroke:white;stroke-width:2"><use href="#i-shield"/></svg>
+      </div>
+      <div>
+        <div style="color:white; font-weight:700; font-size:16px;">EvidNet</div>
+        <div style="color:#3D6080; font-size:11px;">Cadena de Custodia</div>
+      </div>
+    </div>
+    <h1 class="left-title">Trazabilidad total<br>de la <span>evidencia digital</span></h1>
+    <p class="left-desc">Registra, transfiere y audita evidencias con integridad verificable mediante hashes criptográficos y una bitácora inalterable.</p>
+    <div class="feature-list">
+      <div class="feature"><div class="feature-dot"></div><span>Hash SHA-256 automático por cada evidencia</span></div>
+      <div class="feature"><div class="feature-dot"></div><span>Bitácora append-only — registros inmutables</span></div>
+      <div class="feature"><div class="feature-dot"></div><span>Control de acceso basado en roles (RBAC)</span></div>
+      <div class="feature"><div class="feature-dot"></div><span>Línea de tiempo visual de cadena de custodia</span></div>
+      <div class="feature"><div class="feature-dot"></div><span>Alertas de integridad con semáforo en tiempo real</span></div>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="form-logo">
+      <div class="form-logo-box">
+        <svg class="ico" style="width:18px;height:18px;stroke:white;stroke-width:2"><use href="#i-shield"/></svg>
+      </div>
+      <span class="form-logo-name">EvidNet</span>
+    </div>
+
+    <h2>Bienvenido de nuevo</h2>
+    <p class="sub">Ingresa tus credenciales para continuar</p>
+
+    <form onsubmit="event.preventDefault(); window.location='dashboard.html'">
+      <div class="fg">
+        <label>Correo electrónico</label>
+        <input type="email" value="m.garcia@institucion.gt" placeholder="usuario@institucion.gt">
+      </div>
+      <div class="fg">
+        <label>Contraseña</label>
+        <input type="password" value="••••••••••">
+      </div>
+      <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
+      <button type="submit" class="btn-login">
+        <svg class="ico" style="stroke:white"><use href="#i-lock"/></svg>
+        Iniciar sesión
+      </button>
+    </form>
+
+    <div class="divider"><span>o acceder como demo</span></div>
+    <p style="font-size:12px; color:#94A3B8; text-align:center; margin-bottom:11px;">Selecciona un rol para explorar el prototipo</p>
+    <div class="roles">
+      <a href="dashboard.html" class="role-btn">
+        <svg class="ico role-ico" style="width:17px;height:17px;"><use href="#i-user"/></svg>
+        Recolector
+      </a>
+      <a href="dashboard.html" class="role-btn active">
+        <svg class="ico role-ico" style="width:17px;height:17px;"><use href="#i-search"/></svg>
+        Supervisor
+      </a>
+      <a href="analisis-forense.html" class="role-btn">
+        <svg class="ico role-ico" style="width:17px;height:17px;"><use href="#i-activity"/></svg>
+        Analista
+      </a>
+      <a href="dashboard.html" class="role-btn">
+        <svg class="ico role-ico" style="width:17px;height:17px;"><use href="#i-shield"/></svg>
+        Custodio
+      </a>
+      <a href="bitacora.html" class="role-btn">
+        <svg class="ico role-ico" style="width:17px;height:17px;"><use href="#i-search"/></svg>
+        Auditor
+      </a>
+      <a href="usuarios.html" class="role-btn">
+        <svg class="ico role-ico" style="width:17px;height:17px;"><use href="#i-users"/></svg>
+        Admin
+      </a>
+    </div>
+
+    <div class="security">
+      <svg class="ico" style="width:14px;height:14px;color:#94A3B8;flex-shrink:0;margin-top:1px"><use href="#i-lock"/></svg>
+      <p>Sesiones cifradas con TLS 1.3. Las sesiones inactivas se cierran automáticamente.</p>
+    </div>
+    <p class="footer-note">Universidad Mariano Gálvez · Análisis de Sistemas II · 2026</p>
+  </div>
+</div>
+</body>
+</html>

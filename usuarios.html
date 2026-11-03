@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuarios — EvidNet</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-home"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+  <symbol id="i-folder"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-file"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></symbol>
+  <symbol id="i-link"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+  <symbol id="i-shuffle"   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></symbol>
+  <symbol id="i-key"       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></symbol>
+  <symbol id="i-activity"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
+  <symbol id="i-pin"       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></symbol>
+  <symbol id="i-alert"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="i-chart"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+  <symbol id="i-users"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-shield"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-logout"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+  <symbol id="i-plus"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+  <symbol id="i-search"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="i-edit"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></symbol>
+  <symbol id="i-check"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-x"         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  <symbol id="i-user"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+</svg>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <div class="sb-brand-icon"><svg class="ico" style="width:17px;height:17px;stroke-width:2"><use href="#i-shield"/></svg></div>
+      <div><div class="sb-brand-name">EvidNet</div><div class="sb-brand-sub">Cadena de Custodia</div></div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section">
+        <div class="sb-section-label">General</div>
+        <a href="dashboard.html"><svg class="ico"><use href="#i-home"/></svg> Dashboard</a>
+        <a href="incidentes.html"><svg class="ico"><use href="#i-folder"/></svg> Incidentes</a>
+        <a href="evidencias.html"><svg class="ico"><use href="#i-file"/></svg> Evidencias</a>
+      </div>
+      <div class="sb-section">
+        <div class="sb-section-label">Custodia</div>
+        <a href="cadena-custodia.html"><svg class="ico"><use href="#i-link"/></svg> Cadena de custodia</a>
+        <a href="transferencias.html"><svg class="ico"><use href="#i-shuffle"/></svg> Transferencias <span class="sb-badge">3</span></a>
+        <a href="solicitudes.html"><svg class="ico"><use href="#i-key"/></svg> Solicitudes <span class="sb-badge">2</span></a>
+      </div>
+      <div class="sb-section">
+        <div class="sb-section-label">Análisis</div>
+        <a href="analisis-forense.html"><svg class="ico"><use href="#i-activity"/></svg> Análisis forense</a>
+        <a href="ubicacion.html"><svg class="ico"><use href="#i-pin"/></svg> Ubicación</a>
+      </div>
+      <div class="sb-section">
+        <div class="sb-section-label">Auditoría</div>
+        <a href="bitacora.html"><svg class="ico"><use href="#i-clipboard"/></svg> Bitácora</a>
+        <a href="alertas.html"><svg class="ico"><use href="#i-alert"/></svg> Alertas</a>
+        <a href="informes.html"><svg class="ico"><use href="#i-chart"/></svg> Informes</a>
+        <a href="usuarios.html" class="active"><svg class="ico"><use href="#i-users"/></svg> Usuarios</a>
+      </div>
+    </nav>
+    <div class="sb-footer">
+      <div class="sb-user">
+        <div class="sb-avatar">AD</div>
+        <div><div class="sb-user-name">Admin</div><div class="sb-user-role">Administrador</div></div>
+      </div>
+      <a href="login.html" class="sb-logout"><svg class="ico"><use href="#i-logout"/></svg></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="header">
+      <div class="header-left">
+        <div class="header-title">Gestión de usuarios</div>
+        <div class="header-sub">7 roles · 12 usuarios activos</div>
+      </div>
+      <div class="header-right">
+        <button class="btn btn-primary btn-sm" onclick="document.getElementById('mo-usr').classList.add('open')">
+          <svg class="ico"><use href="#i-plus"/></svg> Nuevo usuario
+        </button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="toolbar mb-4">
+        <div class="search-wrap">
+          <svg class="ico search-icon"><use href="#i-search"/></svg>
+          <input type="text" placeholder="Buscar por nombre, correo o rol…">
+        </div>
+        <select class="btn btn-default btn-sm" style="padding-right:12px;">
+          <option>Todos los roles</option>
+          <option>Recolector</option>
+          <option>Custodio</option>
+          <option>Analista Forense</option>
+          <option>Supervisor</option>
+          <option>Auditor</option>
+          <option>Administrador</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Correo</th>
+                <th>Rol</th>
+                <th>Último acceso</th>
+                <th>Estado</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div class="sb-avatar" style="width:26px;height:26px;font-size:10px;background:var(--blue-700);">MG</div>
+                    M. García
+                  </div>
+                </td>
+                <td class="text-3 text-sm">m.garcia@inst.gt</td>
+                <td><span class="badge badge-blue">Supervisor</span></td>
+                <td><span class="text-3">Hoy 08:30</span></td>
+                <td><span class="badge badge-green">Activo</span></td>
+                <td><button class="btn btn-default btn-sm" onclick="document.getElementById('mo-edit').classList.add('open')"><svg class="ico"><use href="#i-edit"/></svg></button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div class="sb-avatar" style="width:26px;height:26px;font-size:10px;background:var(--blue-700);">RP</div>
+                    R. Pérez
+                  </div>
+                </td>
+                <td class="text-3 text-sm">r.perez@inst.gt</td>
+                <td><span class="badge badge-neutral">Recolector</span></td>
+                <td><span class="text-3">Hoy 08:40</span></td>
+                <td><span class="badge badge-green">Activo</span></td>
+                <td><button class="btn btn-default btn-sm" onclick="document.getElementById('mo-edit').classList.add('open')"><svg class="ico"><use href="#i-edit"/></svg></button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div class="sb-avatar" style="width:26px;height:26px;font-size:10px;background:var(--blue-700);">AL</div>
+                    A. López
+                  </div>
+                </td>
+                <td class="text-3 text-sm">a.lopez@inst.gt</td>
+                <td><span class="badge badge-neutral">Custodio</span></td>
+                <td><span class="text-3">Hoy 08:20</span></td>
+                <td><span class="badge badge-green">Activo</span></td>
+                <td><button class="btn btn-default btn-sm" onclick="document.getElementById('mo-edit').classList.add('open')"><svg class="ico"><use href="#i-edit"/></svg></button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div class="sb-avatar" style="width:26px;height:26px;font-size:10px;background:var(--blue-700);">BT</div>
+                    B. Torres
+                  </div>
+                </td>
+                <td class="text-3 text-sm">b.torres@inst.gt</td>
+                <td><span class="badge badge-neutral">Analista Forense</span></td>
+                <td><span class="text-3">Hoy 09:00</span></td>
+                <td><span class="badge badge-green">Activo</span></td>
+                <td><button class="btn btn-default btn-sm" onclick="document.getElementById('mo-edit').classList.add('open')"><svg class="ico"><use href="#i-edit"/></svg></button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div class="sb-avatar" style="width:26px;height:26px;font-size:10px;background:var(--blue-800);">DR</div>
+                    D. Ramos
+                  </div>
+                </td>
+                <td class="text-3 text-sm">d.ramos@inst.gt</td>
+                <td><span class="badge badge-neutral">Analista Forense</span></td>
+                <td><span class="text-3">Ayer 23:14</span></td>
+                <td><span class="badge badge-amber">Bloqueado</span></td>
+                <td><button class="btn btn-default btn-sm" onclick="document.getElementById('mo-edit').classList.add('open')"><svg class="ico"><use href="#i-edit"/></svg></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <span class="page-info">Mostrando 1–5 de 12</span>
+          <div class="page-btns">
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal: nuevo usuario -->
+<div class="modal-overlay" id="mo-usr" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">Nuevo usuario</span>
+      <button class="modal-close" onclick="document.getElementById('mo-usr').classList.remove('open')"><svg class="ico"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row cols-2">
+        <div class="form-group">
+          <label class="form-label">Nombre <span class="req">*</span></label>
+          <input class="form-control" placeholder="Nombre completo">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Correo <span class="req">*</span></label>
+          <input class="form-control" type="email" placeholder="usuario@inst.gt">
+        </div>
+      </div>
+      <div class="form-row cols-2">
+        <div class="form-group">
+          <label class="form-label">Rol <span class="req">*</span></label>
+          <select class="form-control">
+            <option>Recolector</option>
+            <option>Custodio</option>
+            <option>Analista Forense</option>
+            <option>Supervisor</option>
+            <option>Auditor</option>
+            <option>Administrador</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Reportante</label>
+          <select class="form-control"><option>No</option><option>Sí</option></select>
+        </div>
+      </div>
+      <div class="notice notice-info" style="margin-bottom:0;">
+        <svg class="ico"><use href="#i-shield"/></svg>
+        <span>Se enviará un correo con credenciales temporales. El usuario deberá cambiar su contraseña al primer inicio de sesión.</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-default" onclick="document.getElementById('mo-usr').classList.remove('open')">Cancelar</button>
+      <button class="btn btn-primary"><svg class="ico"><use href="#i-check"/></svg> Crear usuario</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: editar usuario -->
+<div class="modal-overlay" id="mo-edit" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">Editar usuario</span>
+      <button class="modal-close" onclick="document.getElementById('mo-edit').classList.remove('open')"><svg class="ico"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Rol</label>
+        <select class="form-control">
+          <option>Recolector</option>
+          <option selected>Custodio</option>
+          <option>Analista Forense</option>
+          <option>Supervisor</option>
+          <option>Auditor</option>
+          <option>Administrador</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Estado</label>
+        <select class="form-control"><option>Activo</option><option>Bloqueado</option></select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-danger" onclick="document.getElementById('mo-edit').classList.remove('open')">Deshabilitar</button>
+      <button class="btn btn-default" onclick="document.getElementById('mo-edit').classList.remove('open')">Cancelar</button>
+      <button class="btn btn-primary"><svg class="ico"><use href="#i-check"/></svg> Guardar</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

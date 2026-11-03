@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alertas — EvidNet</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-home"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+  <symbol id="i-folder"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-file"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></symbol>
+  <symbol id="i-link"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+  <symbol id="i-shuffle"   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></symbol>
+  <symbol id="i-key"       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></symbol>
+  <symbol id="i-activity"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
+  <symbol id="i-pin"       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></symbol>
+  <symbol id="i-alert"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="i-chart"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+  <symbol id="i-users"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-shield"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-logout"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+  <symbol id="i-check"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-eye"       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-hash"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></symbol>
+</svg>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <div class="sb-brand-icon"><svg class="ico" style="width:17px;height:17px;stroke-width:2"><use href="#i-shield"/></svg></div>
+      <div><div class="sb-brand-name">EvidNet</div><div class="sb-brand-sub">Cadena de Custodia</div></div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section">
+        <div class="sb-section-label">General</div>
+        <a href="dashboard.html"><svg class="ico"><use href="#i-home"/></svg> Dashboard</a>
+        <a href="incidentes.html"><svg class="ico"><use href="#i-folder"/></svg> Incidentes</a>
+        <a href="evidencias.html"><svg class="ico"><use href="#i-file"/></svg> Evidencias</a>
+      </div>
+      <div class="sb-section">
+        <div class="sb-section-label">Custodia</div>
+        <a href="cadena-custodia.html"><svg class="ico"><use href="#i-link"/></svg> Cadena de custodia</a>
+        <a href="transferencias.html"><svg class="ico"><use href="#i-shuffle"/></svg> Transferencias <span class="sb-badge">3</span></a>
+        <a href="solicitudes.html"><svg class="ico"><use href="#i-key"/></svg> Solicitudes <span class="sb-badge">2</span></a>
+      </div>
+      <div class="sb-section">
+        <div class="sb-section-label">Análisis</div>
+        <a href="analisis-forense.html"><svg class="ico"><use href="#i-activity"/></svg> Análisis forense</a>
+        <a href="ubicacion.html"><svg class="ico"><use href="#i-pin"/></svg> Ubicación</a>
+      </div>
+      <div class="sb-section">
+        <div class="sb-section-label">Auditoría</div>
+        <a href="bitacora.html"><svg class="ico"><use href="#i-clipboard"/></svg> Bitácora</a>
+        <a href="alertas.html" class="active"><svg class="ico"><use href="#i-alert"/></svg> Alertas</a>
+        <a href="informes.html"><svg class="ico"><use href="#i-chart"/></svg> Informes</a>
+        <a href="usuarios.html"><svg class="ico"><use href="#i-users"/></svg> Usuarios</a>
+      </div>
+    </nav>
+    <div class="sb-footer">
+      <div class="sb-user">
+        <div class="sb-avatar">MG</div>
+        <div><div class="sb-user-name">M. García</div><div class="sb-user-role">Supervisor</div></div>
+      </div>
+      <a href="login.html" class="sb-logout"><svg class="ico"><use href="#i-logout"/></svg></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="header">
+      <div class="header-left">
+        <div class="header-title">Alertas</div>
+        <div class="header-sub">2 activas · 1 integridad, 1 acceso</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Active alerts -->
+      <div class="section-label mb-4">Activas</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
+
+        <!-- Alert 1: integrity -->
+        <div class="card" style="border-left:3px solid var(--red);">
+          <div class="card-body">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                  <span class="sem-row sem-red"><span class="sem-dot"></span></span>
+                  <span class="fw-700">Alerta de integridad — hash modificado</span>
+                  <span class="badge badge-red">Crítica</span>
+                </div>
+                <div class="text-sm" style="margin-bottom:6px;">
+                  La evidencia <span class="mono">EVD-0440</span> presenta discrepancia de hash respecto al valor registrado en la recolección.
+                </div>
+                <div class="text-sm text-3">
+                  <svg class="ico ico-sm"><use href="#i-hash"/></svg>
+                  Detectado: 21 oct 2026 · 02:14 (verificación automática)
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;min-width:110px;">
+                <a href="evidencias.html" class="btn btn-default btn-sm"><svg class="ico"><use href="#i-eye"/></svg> Ver evidencia</a>
+                <button class="btn btn-success btn-sm"><svg class="ico"><use href="#i-check"/></svg> Atender</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alert 2: unauthorized access attempt -->
+        <div class="card" style="border-left:3px solid var(--amber);">
+          <div class="card-body">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                  <span class="sem-row sem-amber"><span class="sem-dot"></span></span>
+                  <span class="fw-700">Intento de acceso no autorizado</span>
+                  <span class="badge badge-amber">Alta</span>
+                </div>
+                <div class="text-sm" style="margin-bottom:6px;">
+                  Usuario <strong>D. Ramos</strong> intentó acceder a <span class="mono">EVD-0432</span> sin autorización del Supervisor.
+                </div>
+                <div class="text-sm text-3">
+                  <svg class="ico ico-sm"><use href="#i-shield"/></svg>
+                  Detectado: 20 oct 2026 · 23:14 · IP: 10.1.3.11
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;min-width:110px;">
+                <a href="bitacora.html" class="btn btn-default btn-sm"><svg class="ico"><use href="#i-eye"/></svg> Ver log</a>
+                <button class="btn btn-success btn-sm"><svg class="ico"><use href="#i-check"/></svg> Atender</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resolved -->
+      <div class="section-label mb-4">Resueltas recientemente</div>
+      <div class="card">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Tipo</th><th>Descripción</th><th>Resuelta por</th><th>Fecha</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><span class="badge badge-neutral">Integridad</span></td>
+                <td>Hash mismatch en <span class="mono">EVD-0385</span></td>
+                <td>M. García · Supervisor</td>
+                <td><span class="text-3">14 oct</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-neutral">Acceso</span></td>
+                <td>Sesión expirada — R. Pérez</td>
+                <td>Sistema</td>
+                <td><span class="text-3">10 oct</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

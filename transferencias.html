@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transferencias — EvidNet</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-home"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+  <symbol id="i-folder"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-file"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></symbol>
+  <symbol id="i-link"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+  <symbol id="i-shuffle"   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></symbol>
+  <symbol id="i-key"       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></symbol>
+  <symbol id="i-activity"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
+  <symbol id="i-pin"       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></symbol>
+  <symbol id="i-alert"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="i-chart"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+  <symbol id="i-users"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-shield"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-logout"    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+  <symbol id="i-check"     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-x"         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  <symbol id="i-eye"       viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-user"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="i-edit"      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></symbol>
+</svg>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <div class="sb-brand-icon"><svg class="ico" style="width:17px;height:17px;stroke-width:2"><use href="#i-shield"/></svg></div>
+      <div><div class="sb-brand-name">EvidNet</div><div class="sb-brand-sub">Cadena de Custodia</div></div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section">
+        <div class="sb-section-label">General</div>
+        <a href="dashboard.html"><svg class="ico"><use href="#i-home"/></svg> Dashboard</a>
+        <a href="incidentes.html"><svg class="ico"><use href="#i-folder"/></svg> Incidentes</a>
+        <a href="evidencias.html"><svg class="ico"><use href="#i-file"/></svg> Evidencias</a>
+      </div>
+      <div class="sb-section">
+        <div class="sb-section-label">Custodia</div>
+        <a href="cadena-custodia.html"><svg class="ico"><use href="#i-link"/></svg> Cadena de custodia</a>
+        <a href="transferencias.html" class="active"><svg class="ico"><use href="#i-shuffle"/></svg> Transferencias <span class="sb-badge">3</span></a>
+        <a href="solicitudes.html"><svg class="ico"><use href="#i-key"/></svg> Solicitudes <span class="sb-badge">2</span></a>
+      </div>
+      <div class="sb-section">
+        <div class="sb-section-label">Análisis</div>
+        <a href="analisis-forense.html"><svg class="ico"><use href="#i-activity"/></svg> Análisis forense</a>
+        <a href="ubicacion.html"><svg class="ico"><use href="#i-pin"/></svg> Ubicación</a>
+      </div>
+      <div class="sb-section">
+        <div class="sb-section-label">Auditoría</div>
+        <a href="bitacora.html"><svg class="ico"><use href="#i-clipboard"/></svg> Bitácora</a>
+        <a href="alertas.html"><svg class="ico"><use href="#i-alert"/></svg> Alertas</a>
+        <a href="informes.html"><svg class="ico"><use href="#i-chart"/></svg> Informes</a>
+        <a href="usuarios.html"><svg class="ico"><use href="#i-users"/></svg> Usuarios</a>
+      </div>
+    </nav>
+    <div class="sb-footer">
+      <div class="sb-user">
+        <div class="sb-avatar">MG</div>
+        <div><div class="sb-user-name">M. García</div><div class="sb-user-role">Supervisor</div></div>
+      </div>
+      <a href="login.html" class="sb-logout"><svg class="ico"><use href="#i-logout"/></svg></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="header">
+      <div class="header-left">
+        <div class="header-title">Transferencias</div>
+        <div class="header-sub">3 pendientes de aprobación</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="notice notice-amber mb-6">
+        <svg class="ico"><use href="#i-alert"/></svg>
+        <div>Tienes <strong>3 transferencias</strong> esperando tu aprobación como Supervisor.</div>
+      </div>
+
+      <!-- Pending -->
+      <div class="section-label mb-4">Pendientes de aprobación</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
+
+        <!-- Card 1 -->
+        <div class="card">
+          <div class="card-body" style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;">
+            <div>
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                <span class="mono fw-700">EVD-0449</span>
+                <span class="badge badge-neutral">Imagen de disco</span>
+                <span class="badge badge-amber">Pendiente</span>
+              </div>
+              <div style="font-size:12.5px;color:var(--text-2);">
+                <svg class="ico ico-sm text-3"><use href="#i-user"/></svg> A. López → B. Torres · Análisis Forense
+              </div>
+              <div style="font-size:11px;color:var(--text-3);margin-top:3px;">
+                Solicitado: 19 oct · Motivo: extracción de artefactos
+              </div>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button class="btn btn-success btn-sm" onclick="document.getElementById('mo-firm').classList.add('open')"><svg class="ico"><use href="#i-check"/></svg> Aprobar</button>
+              <button class="btn btn-danger btn-sm"><svg class="ico"><use href="#i-x"/></svg> Rechazar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+          <div class="card-body" style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;">
+            <div>
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                <span class="mono fw-700">EVD-0445</span>
+                <span class="badge badge-neutral">Red / PCAP</span>
+                <span class="badge badge-amber">Pendiente</span>
+              </div>
+              <div style="font-size:12.5px;color:var(--text-2);">
+                <svg class="ico ico-sm text-3"><use href="#i-user"/></svg> C. Morales → B. Torres · Análisis Forense
+              </div>
+              <div style="font-size:11px;color:var(--text-3);margin-top:3px;">
+                Solicitado: 20 oct · Motivo: análisis de tráfico
+              </div>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button class="btn btn-success btn-sm" onclick="document.getElementById('mo-firm').classList.add('open')"><svg class="ico"><use href="#i-check"/></svg> Aprobar</button>
+              <button class="btn btn-danger btn-sm"><svg class="ico"><use href="#i-x"/></svg> Rechazar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+          <div class="card-body" style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;">
+            <div>
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                <span class="mono fw-700">EVD-0448</span>
+                <span class="badge badge-neutral">Log</span>
+                <span class="badge badge-amber">Pendiente</span>
+              </div>
+              <div style="font-size:12.5px;color:var(--text-2);">
+                <svg class="ico ico-sm text-3"><use href="#i-user"/></svg> A. López → Almacén Seguro · Custodio
+              </div>
+              <div style="font-size:11px;color:var(--text-3);margin-top:3px;">
+                Solicitado: 21 oct · Motivo: resguardo post-análisis
+              </div>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button class="btn btn-success btn-sm" onclick="document.getElementById('mo-firm').classList.add('open')"><svg class="ico"><use href="#i-check"/></svg> Aprobar</button>
+              <button class="btn btn-danger btn-sm"><svg class="ico"><use href="#i-x"/></svg> Rechazar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- History -->
+      <div class="section-label mb-4">Historial reciente</div>
+      <div class="card">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Evidencia</th><th>Origen → Destino</th><th>Estado</th><th>Fecha</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><span class="mono">EVD-0440</span></td>
+                <td class="text-3 text-sm">Recolector → Custodio</td>
+                <td><span class="badge badge-green">Aprobada</span></td>
+                <td><span class="text-3">14 oct</span></td>
+              </tr>
+              <tr>
+                <td><span class="mono">EVD-0435</span></td>
+                <td class="text-3 text-sm">Custodio → Análisis</td>
+                <td><span class="badge badge-red">Rechazada</span></td>
+                <td><span class="text-3">10 oct</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal: firmar transferencia -->
+<div class="modal-overlay" id="mo-firm" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">Aprobar transferencia</span>
+      <button class="modal-close" onclick="document.getElementById('mo-firm').classList.remove('open')"><svg class="ico"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="notice notice-info mb-4">
+        <svg class="ico"><use href="#i-alert"/></svg>
+        <span>Esta acción es irreversible y quedará registrada en la bitácora.</span>
+      </div>
+      <div class="info-row"><span class="info-lbl">Evidencia</span><span class="info-val mono">EVD-0449</span></div>
+      <div class="info-row"><span class="info-lbl">Destino</span><span class="info-val">B. Torres · Análisis Forense</span></div>
+      <div class="info-row"><span class="info-lbl">Acceso</span><span class="info-val">Solo lectura</span></div>
+      <div style="margin-top:14px;">
+        <label class="form-label">Firma electrónica del Supervisor</label>
+        <div class="sig-area" onclick="this.className='sig-area signed'; this.innerHTML='<svg class=\'ico\' style=\'width:14px;height:14px;color:var(--green)\'><use href=\'#i-check\'/></svg> M. García · Supervisor · 21 oct 2026'">
+          <svg class="ico"><use href="#i-edit"/></svg>
+          Hacer clic para firmar
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-default" onclick="document.getElementById('mo-firm').classList.remove('open')">Cancelar</button>
+      <button class="btn btn-success"><svg class="ico"><use href="#i-check"/></svg> Confirmar aprobación</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
